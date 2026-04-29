@@ -1,26 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sujal Patel Portfolio
 
-## Getting Started
+A bold, animated personal portfolio built with Next.js, featuring custom UI motion, 3D accents, and a contact form backed by Gmail SMTP.
 
-First, run the development server:
+## Overview
+
+- Sections: Hero, About, Skills, Projects, Experience, Certifications, Contact
+- Pages: Home and a dedicated Resume viewer
+- Contact form: Server-side email delivery via SMTP (Gmail App Password or OAuth2)
+
+## Key Features
+
+- Animated hero with typewriter role cycling
+- 3D tech globe with Three.js and interactive motion
+- Particle field background and custom cursor system
+- Scroll progress indicator and rich UI micro-interactions
+- Resume page with embedded PDF and download CTA
+
+## Tech Stack
+
+- Next.js App Router
+- React + TypeScript
+- Tailwind CSS
+- Framer Motion
+- Three.js
+- React Hook Form + Zod
+- Nodemailer (SMTP)
+
+## Routes
+
+- `/` - Main portfolio
+- `/resume` - Resume viewer
+- `/api/contact` - Contact form endpoint
+
+## Run Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment Variables
 
-## Contact Mail Service (Nodemailer)
-
-The contact form uses a server-side Route Handler at `src/app/api/contact/route.ts` and sends emails with Nodemailer over SMTP.
-
-Create a `.env.local` file using these variables:
+Set the following variables in your local environment or hosting provider:
 
 ```bash
 SMTP_HOST=smtp.gmail.com
@@ -29,38 +50,32 @@ SMTP_SECURE=false
 SMTP_USER=your-gmail-address@gmail.com
 GOOGLE_SMTP_APP_PASSWORD=your-gmail-app-password
 SMTP_FROM="Sujal Portfolio <your-gmail-address@gmail.com>"
-CONTACT_EMAIL=sdpatel7122005@gmail.com
+CONTACT_EMAIL=your-gmail-address@gmail.com
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
-Deployment notes:
+Optional OAuth2 variables (use these only if you want OAuth2 instead of an App Password):
 
-- Add the same variables to your hosting provider's environment settings (for example, Vercel project settings).
-- Use an SMTP provider that allows server-side sending in production (Gmail App Password, Brevo SMTP, Mailtrap, Zoho, etc.).
-- Ensure `SMTP_FROM` is a sender address verified by your SMTP provider to avoid rejected emails.
-- Redeploy after setting environment variables.
+```bash
+GOOGLE_CLIENT_ID=your-google-oauth-client-id
+GOOGLE_CLIENT_SECRET=your-google-oauth-client-secret
+GOOGLE_REFRESH_TOKEN=your-google-oauth-refresh-token
+```
 
-Gmail-specific notes:
+Optional for non-Gmail SMTP providers:
 
-- App Password (recommended for simplicity): If your Google account uses 2-Step Verification, create an App Password and set it as `GOOGLE_SMTP_APP_PASSWORD` with `SMTP_USER` set to your full Gmail address.
-- OAuth2 (recommended for long-term security): You can provide `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and `GOOGLE_REFRESH_TOKEN` instead. The server will use OAuth2 to obtain access tokens and send via Gmail securely. See the `.env.example` for optional variables.
-- Never commit credentials: Do not commit `SMTP_PASS`, `GOOGLE_*`, or other secrets — add them to your host's secret management (Vercel, Netlify, etc.).
+```bash
+SMTP_PASS=your-smtp-password
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment Notes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Add the same environment variables to your hosting provider.
+- Ensure the Gmail account matches `SMTP_USER` and the App Password was created for that account.
+- Set `NEXT_PUBLIC_SITE_URL` to your production domain for correct metadata/OG tags.
+- Redeploy after updating environment variables.
 
-## Learn More
+## Assets
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Update `public/resume.pdf` with your latest resume
+- Update `public/og-image.png` for social previews

@@ -78,4 +78,4 @@ SMTP_PASS=your-smtp-password
 ## Assets
 
 - Update `public/resume.pdf` with your latest resume
-- Update `public/og-image.png` for social previews
+- Update `public/Logo (2).png` for social previews and the browser tab icon

@@ -4,26 +4,19 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] bg-[var(--bg-primary)] py-10">
-      <div className="mx-auto flex w-[min(92vw,1200px)] flex-col gap-6 text-xs text-[var(--text-dim)] md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center gap-4 font-[family-name:var(--font-dm-sans)]">
-          <span className="text-base font-bold tracking-wider text-[var(--accent-cyan)] font-[family-name:var(--font-space-mono)]">
-            SP
+    <footer className="border-t border-[var(--border)] py-8 px-5 sm:px-8">
+      <div className="mx-auto max-w-[1200px] flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px] text-[var(--text-dim)]">
+        <div className="flex items-center gap-2">
+          <span className="font-[600] text-[var(--text-primary)] font-[family-name:var(--font-display)]">
+            SP<span className="text-[var(--accent)]">.</span>
           </span>
-          <span className="uppercase tracking-[0.2em] text-[var(--text-secondary)]">Sujal Patel</span>
-          <span className="hidden text-white/20 md:inline">|</span>
-          <span className="text-[var(--text-dim)]">
-            Built with Next.js +{" "}
-            <span className="inline-block animate-heart-pulse text-red-400">♡</span>
-          </span>
+          <span>© 2026 Sujal Patel</span>
+          <span className="hidden sm:inline">·</span>
+          <span className="hidden sm:inline">Built with Next.js + <span className="animate-heart-pulse inline-block text-red-400">♥</span></span>
         </div>
-
-        <div className="flex items-center gap-6 font-[family-name:var(--font-dm-sans)]">
-          <span className="text-[var(--text-dim)]">© 2026 Sujal Patel</span>
-          <MagneticButton href="#hero" variant="ghost" className="text-[11px]">
-            ↑ Back to top
-          </MagneticButton>
-        </div>
+        <MagneticButton href="#hero" variant="ghost" className="text-[12px]">
+          Back to top ↑
+        </MagneticButton>
       </div>
     </footer>
   );

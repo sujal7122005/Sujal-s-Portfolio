@@ -1,44 +1,40 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { NeonBadge } from "@/components/ui/NeonBadge";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 import { SKILL_CATEGORIES } from "@/lib/constants";
 
-const colorCycle = ["cyan", "violet", "green"] as const;
-
 export function Skills() {
   return (
-    <section id="skills" className="bg-[var(--bg-primary)] px-4 py-20 sm:px-6 md:py-32">
-      <div className="mx-auto w-[min(94vw,1200px)]">
-        <SectionTitle label="// 02 TECH STACK" heading="What I Build With" />
+    <section id="skills" className="px-5 sm:px-8 py-24 md:py-32 border-t border-[var(--border)]">
+      <div className="mx-auto max-w-[1200px]">
+        <SectionTitle label="Stack" heading="What I Build With" />
 
         <motion.div
-          className="grid gap-6 sm:gap-8"
+          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
         >
-          {SKILL_CATEGORIES.map((category, index) => (
+          {SKILL_CATEGORIES.map((category) => (
             <motion.div
               key={category.title}
               variants={fadeUp}
-              className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 sm:p-6"
+              className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 hover:border-[var(--border-hover)] transition-colors duration-300"
             >
-              <h3 className="mb-4 text-[12px] uppercase tracking-[0.25em] text-[var(--accent-cyan)]/70 font-[family-name:var(--font-jetbrains-mono)]">
+              <h3 className="text-[13px] font-medium uppercase tracking-[0.12em] text-[var(--accent)] mb-5 font-[family-name:var(--font-mono)]">
                 {category.title}
               </h3>
-
-              <div className="flex flex-wrap gap-2 sm:gap-3">
+              <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill) => (
-                  <NeonBadge
+                  <span
                     key={skill.label}
-                    label={skill.label}
-                    icon={skill.icon}
-                    color={colorCycle[index % colorCycle.length]}
-                  />
+                    className="rounded-md border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-1.5 text-[12px] text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] hover:border-[var(--border-hover)] font-[family-name:var(--font-mono)]"
+                  >
+                    {skill.label}
+                  </span>
                 ))}
               </div>
             </motion.div>

@@ -3,76 +3,60 @@
 import { motion } from "framer-motion";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { slideLeft, slideRight } from "@/lib/animations";
+import { fadeUp, staggerContainer } from "@/lib/animations";
 import { TIMELINE_ITEMS } from "@/lib/constants";
-import { cn } from "@/lib/utils";
 
 export function Experience() {
   return (
-    <section
-      id="experience"
-      className="bg-[var(--bg-primary)] px-4 py-20 sm:px-6 md:py-32"
-    >
-      <div className="mx-auto w-[min(94vw,1200px)]">
-        <SectionTitle label="// 04 EXPERIENCE" heading="My Journey" />
+    <section id="experience" className="px-5 sm:px-8 py-24 md:py-32 border-t border-[var(--border)]">
+      <div className="mx-auto max-w-[1200px]">
+        <SectionTitle label="Experience" heading="My Journey" />
 
-        <div className="relative mt-12 space-y-8">
-          {/* Timeline center line */}
-          <motion.div
-            className="absolute bottom-0 left-5 top-0 w-px origin-top bg-gradient-to-b from-[var(--accent-cyan)]/60 via-[var(--accent-violet)]/40 to-transparent md:left-1/2"
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-          />
+        <motion.div
+          className="relative space-y-6 pl-8 md:pl-0"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          {/* Vertical line — mobile left, desktop center */}
+          <div className="absolute top-0 bottom-0 left-3 md:left-1/2 md:-translate-x-px w-px bg-gradient-to-b from-[var(--accent)]/30 via-[var(--border)] to-transparent" />
 
           {TIMELINE_ITEMS.map((item, index) => {
-            const right = index % 2 === 1;
-            const variants = right ? slideRight : slideLeft;
+            const isRight = index % 2 === 1;
 
             return (
               <motion.div
                 key={`${item.period}-${item.title}`}
-                className={cn(
-                  "relative pl-14 md:w-1/2 md:pl-0",
-                  right ? "md:ml-auto md:pl-10" : "md:pr-10",
-                )}
-                variants={variants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                variants={fadeUp}
+                className={`relative md:w-[calc(50%-24px)] ${isRight ? "md:ml-auto" : ""}`}
               >
-                {/* Timeline dot */}
-                <span
-                  className={cn(
-                    "absolute top-8 h-3.5 w-3.5 rounded-full border-2 border-[var(--accent-cyan)]/50 bg-[var(--accent-cyan)] shadow-[0_0_10px_var(--accent-cyan)]",
-                    right ? "left-[13px] md:-left-[7px]" : "left-[13px] md:-right-[7px]",
-                  )}
-                />
+                {/* Dot */}
+                <span className={`absolute top-7 -left-[25px] md:top-7 h-2.5 w-2.5 rounded-full border-2 border-[var(--accent)] bg-[var(--bg-primary)] ${isRight ? "md:-left-[37px]" : "md:-right-[37px] md:left-auto"}`} />
 
-                <GlassCard hoverGlow="cyan" className="p-5 sm:p-6">
-                  <p className="text-[11px] uppercase tracking-[0.22em] text-[var(--accent-cyan)]/70 font-[family-name:var(--font-jetbrains-mono)]">
+                <GlassCard className="p-5 sm:p-6">
+                  <p className="text-[12px] font-medium text-[var(--accent)] mb-1 font-[family-name:var(--font-mono)]">
                     {item.period}
                   </p>
-                  <h3 className="mt-2 text-lg text-white sm:text-xl font-[family-name:var(--font-syne)] font-semibold">
+                  <h3 className="text-lg font-[600] text-[var(--text-primary)] font-[family-name:var(--font-display)]">
                     {item.title}
                   </h3>
-                  <p className="mt-1 text-[var(--text-secondary)] text-sm font-[family-name:var(--font-dm-sans)]">
+                  <p className="text-[13px] text-[var(--text-dim)] mt-0.5">
                     {item.organization}
                   </p>
 
                   {item.subtitle && (
-                    <p className="mt-2 text-[var(--accent-cyan)] text-sm font-medium font-[family-name:var(--font-dm-sans)]">
+                    <p className="mt-2 text-[14px] text-[var(--text-primary)] font-medium">
                       {item.subtitle}
                     </p>
                   )}
 
                   {item.bullets && (
-                    <ul className="mt-4 space-y-2 text-[var(--text-secondary)] text-sm font-[family-name:var(--font-dm-sans)]">
+                    <ul className="mt-3 space-y-1.5">
                       {item.bullets.map((bullet) => (
-                        <li key={bullet} className="flex items-start gap-2.5">
-                          <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent-violet)]" />
-                          <span>{bullet}</span>
+                        <li key={bullet} className="flex items-start gap-2 text-[13px] text-[var(--text-secondary)]">
+                          <span className="mt-[6px] h-1 w-1 shrink-0 rounded-full bg-[var(--text-dim)]" />
+                          {bullet}
                         </li>
                       ))}
                     </ul>
@@ -81,7 +65,7 @@ export function Experience() {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

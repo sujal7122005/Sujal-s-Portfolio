@@ -10,261 +10,137 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 import { fadeUp } from "@/lib/animations";
 import { CONTACT_DETAILS, SOCIAL_LINKS } from "@/lib/constants";
 
-const contactSchema = z.object({
-  name: z.string().min(2, "Name is too short").max(80, "Name is too long"),
-  email: z.string().email("Enter a valid email"),
-  subject: z.string().min(3, "Subject is too short").max(120, "Subject is too long"),
-  message: z
-    .string()
-    .min(20, "Message should be at least 20 characters")
-    .max(1200, "Message is too long"),
+const schema = z.object({
+  name: z.string().min(2, "Too short").max(80),
+  email: z.string().email("Invalid email"),
+  subject: z.string().min(3, "Too short").max(120),
+  message: z.string().min(20, "At least 20 characters").max(1200),
 });
 
-type ContactInput = z.infer<typeof contactSchema>;
+type FormData = z.infer<typeof schema>;
 
 export function Contact() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [feedback, setFeedback] = useState("");
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<ContactInput>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    },
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (values: ContactInput) => {
-    setIsSubmitting(true);
+  const onSubmit = async (values: FormData) => {
+    setSubmitting(true);
     setStatus("idle");
-    setFeedback("");
-
     try {
-      const response = await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
-
-      const payload = (await response.json()) as { message?: string; error?: string };
-
-      if (!response.ok) {
-        throw new Error(payload.error ?? "Unable to send message right now.");
-      }
-
+      const data = (await res.json()) as { message?: string; error?: string };
+      if (!res.ok) throw new Error(data.error ?? "Failed to send");
       setStatus("success");
-      setFeedback(payload.message ?? "Message sent successfully.");
+      setFeedback(data.message ?? "Message sent!");
       reset();
-    } catch (error) {
+    } catch (err) {
       setStatus("error");
-      setFeedback(
-        error instanceof Error
-          ? error.message
-          : "Something went wrong. Please try again.",
-      );
+      setFeedback(err instanceof Error ? err.message : "Something went wrong");
     } finally {
-      setIsSubmitting(false);
+      setSubmitting(false);
     }
   };
 
-  const inputBaseClass =
-    "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white outline-none transition-all duration-300 focus:border-[var(--accent-cyan)]/50 focus:shadow-[0_0_15px_rgba(255,51,51,0.08)] font-[family-name:var(--font-dm-sans)] placeholder:text-white/20";
+  const inputClass = "w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-4 py-3 text-[var(--text-primary)] text-[15px] outline-none transition-colors focus:border-[var(--accent)]/40 placeholder:text-[var(--text-dim)]";
 
   return (
-    <section id="contact" className="bg-[var(--bg-primary)] px-4 py-20 sm:px-6 md:py-32">
-      <div className="mx-auto w-[min(94vw,1200px)]">
-        <SectionTitle label="// 06 CONTACT" heading="Let's Connect" />
-        <p className="-mt-6 mb-10 max-w-2xl text-[var(--text-secondary)] text-base sm:text-lg font-[family-name:var(--font-dm-sans)]">
-          Open to SDE and Full-Stack internship opportunities. Whether you have a
-          role, a project, or just want to talk tech — my inbox is open.
-        </p>
+    <section id="contact" className="px-5 sm:px-8 py-24 md:py-32 border-t border-[var(--border)]">
+      <div className="mx-auto max-w-[1200px]">
+        <SectionTitle label="Contact" heading="Let's Connect" />
 
-        <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-8">
-          {/* Contact Form */}
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
+          {/* Form */}
           <motion.form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-4 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 sm:p-6 md:p-8"
+            className="space-y-5 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 sm:p-8"
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true }}
           >
-            <div className="space-y-2">
-              <label
-                htmlFor="name"
-                className="text-[12px] uppercase tracking-[0.22em] text-[var(--text-dim)] font-[family-name:var(--font-jetbrains-mono)]"
-              >
-                Name
-              </label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Your name"
-                {...register("name")}
-                className={inputBaseClass}
-              />
-              {errors.name && (
-                <p className="text-sm text-red-400">{errors.name.message}</p>
-              )}
+            <div>
+              <label htmlFor="name" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-mono)]">Name</label>
+              <input id="name" {...register("name")} className={inputClass} placeholder="Your name" />
+              {errors.name && <p className="text-red-400 text-[13px] mt-1">{errors.name.message}</p>}
             </div>
 
-            <div className="space-y-2">
-              <label
-                htmlFor="email"
-                className="text-[12px] uppercase tracking-[0.22em] text-[var(--text-dim)] font-[family-name:var(--font-jetbrains-mono)]"
-              >
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="your@email.com"
-                {...register("email")}
-                className={inputBaseClass}
-              />
-              {errors.email && (
-                <p className="text-sm text-red-400">{errors.email.message}</p>
-              )}
+            <div>
+              <label htmlFor="email" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-mono)]">Email</label>
+              <input id="email" type="email" {...register("email")} className={inputClass} placeholder="you@email.com" />
+              {errors.email && <p className="text-red-400 text-[13px] mt-1">{errors.email.message}</p>}
             </div>
 
-            <div className="space-y-2">
-              <label
-                htmlFor="subject"
-                className="text-[12px] uppercase tracking-[0.22em] text-[var(--text-dim)] font-[family-name:var(--font-jetbrains-mono)]"
-              >
-                Subject
-              </label>
-              <input
-                id="subject"
-                type="text"
-                placeholder="What's this about?"
-                {...register("subject")}
-                className={inputBaseClass}
-              />
-              {errors.subject && (
-                <p className="text-sm text-red-400">{errors.subject.message}</p>
-              )}
+            <div>
+              <label htmlFor="subject" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-mono)]">Subject</label>
+              <input id="subject" {...register("subject")} className={inputClass} placeholder="What's this about?" />
+              {errors.subject && <p className="text-red-400 text-[13px] mt-1">{errors.subject.message}</p>}
             </div>
 
-            <div className="space-y-2">
-              <label
-                htmlFor="message"
-                className="text-[12px] uppercase tracking-[0.22em] text-[var(--text-dim)] font-[family-name:var(--font-jetbrains-mono)]"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                rows={5}
-                placeholder="Tell me about your project or opportunity..."
-                {...register("message")}
-                className={`${inputBaseClass} resize-none`}
-              />
-              {errors.message && (
-                <p className="text-sm text-red-400">{errors.message.message}</p>
-              )}
+            <div>
+              <label htmlFor="message" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-mono)]">Message</label>
+              <textarea id="message" rows={5} {...register("message")} className={`${inputClass} resize-none`} placeholder="Tell me about your project or opportunity..." />
+              {errors.message && <p className="text-red-400 text-[13px] mt-1">{errors.message.message}</p>}
             </div>
 
-            <MagneticButton
-              type="submit"
-              variant="filled"
-              disabled={isSubmitting}
-              className="w-full justify-center sm:w-auto"
-            >
-              {isSubmitting ? (
-                <span className="flex items-center gap-2">
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                  Sending...
-                </span>
-              ) : (
-                "Send Message →"
-              )}
+            <MagneticButton type="submit" variant="filled" disabled={submitting} className="w-full sm:w-auto">
+              {submitting ? "Sending..." : "Send Message →"}
             </MagneticButton>
 
             {feedback && (
-              <p
-                className={`text-sm ${
-                  status === "success" ? "text-[var(--accent-green)]" : "text-red-400"
-                }`}
-              >
-                {status === "success" ? "✓ " : "✗ "}
+              <p className={`text-[13px] ${status === "success" ? "text-green-400" : "text-red-400"}`}>
                 {feedback}
               </p>
             )}
           </motion.form>
 
-          {/* Contact Info */}
-          <motion.aside
-            className="space-y-6"
+          {/* Info sidebar */}
+          <motion.div
+            className="space-y-5"
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true }}
           >
-            {/* Contact details */}
-            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 sm:p-6">
-              <h3 className="text-[12px] uppercase tracking-[0.22em] text-[var(--text-dim)] font-[family-name:var(--font-jetbrains-mono)] mb-4">
-                Contact Info
-              </h3>
-              <div className="space-y-3 text-[var(--text-secondary)] font-[family-name:var(--font-dm-sans)]">
-                <p className="flex items-center gap-3">
-                  <span className="text-[var(--accent-cyan)]">📧</span>
-                  <a href={`mailto:${CONTACT_DETAILS.email}`} className="transition-colors hover:text-[var(--accent-cyan)]">
-                    {CONTACT_DETAILS.email}
-                  </a>
-                </p>
-                <p className="flex items-center gap-3">
-                  <span className="text-[var(--accent-cyan)]">📱</span>
-                  <a href={`tel:${CONTACT_DETAILS.phone}`} className="transition-colors hover:text-[var(--accent-cyan)]">
-                    {CONTACT_DETAILS.phone}
-                  </a>
-                </p>
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
+              <h3 className="text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-4 font-[family-name:var(--font-mono)]">Get in touch</h3>
+              <div className="space-y-3 text-[15px]">
+                <a href={`mailto:${CONTACT_DETAILS.email}`} className="block text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                  {CONTACT_DETAILS.email}
+                </a>
+                <a href={`tel:${CONTACT_DETAILS.phone}`} className="block text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                  {CONTACT_DETAILS.phone}
+                </a>
               </div>
             </div>
 
-            {/* Social links */}
-            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 sm:p-6">
-              <h3 className="text-[12px] uppercase tracking-[0.22em] text-[var(--text-dim)] font-[family-name:var(--font-jetbrains-mono)] mb-4">
-                Find Me On
-              </h3>
-              <div className="flex flex-wrap gap-3">
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
+              <h3 className="text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-4 font-[family-name:var(--font-mono)]">Links</h3>
+              <div className="flex flex-wrap gap-2">
                 {SOCIAL_LINKS.map((social) => (
-                  <MagneticButton
-                    key={social.label}
-                    href={social.url}
-                    variant="outline"
-                    className="px-4 py-2 text-[11px]"
-                  >
+                  <MagneticButton key={social.label} href={social.url} variant="outline" className="text-[12px]">
                     {social.label} ↗
                   </MagneticButton>
                 ))}
               </div>
             </div>
 
-            {/* Availability status */}
-            <div className="rounded-2xl border border-[var(--accent-green)]/15 bg-[var(--accent-green)]/[0.03] p-5 sm:p-6">
-              <p className="flex items-center gap-3 text-[var(--text-primary)] text-sm font-[family-name:var(--font-dm-sans)]">
-                <span className="relative inline-flex h-3 w-3">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent-green)]/60" />
-                  <span className="relative inline-flex h-3 w-3 rounded-full bg-[var(--accent-green)]" />
-                </span>
-                {CONTACT_DETAILS.status}
-              </p>
-              <p className="mt-2 text-[var(--text-dim)] text-xs font-[family-name:var(--font-dm-sans)]">
-                Currently seeking opportunities for Summer 2026
-              </p>
+            <div className="rounded-2xl border border-green-500/15 bg-green-500/[0.04] p-6">
+              <div className="flex items-center gap-3">
+                <span className="h-2.5 w-2.5 rounded-full bg-green-500" />
+                <span className="text-[14px] text-[var(--text-primary)] font-medium">{CONTACT_DETAILS.status}</span>
+              </div>
+              <p className="text-[13px] text-[var(--text-dim)] mt-2">Currently seeking Summer 2026 opportunities</p>
             </div>
-          </motion.aside>
+          </motion.div>
         </div>
       </div>
     </section>

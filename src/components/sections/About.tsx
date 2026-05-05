@@ -7,36 +7,28 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 import { ABOUT_STATS } from "@/lib/constants";
 
-const accentColors = ["var(--accent-cyan)", "var(--accent-violet)", "var(--accent-green)", "var(--accent-cyan)"];
-
 export function About() {
   return (
-    <section id="about" className="bg-[var(--bg-secondary)] px-4 py-20 sm:px-6 md:py-32">
-      <div className="mx-auto grid w-[min(94vw,1200px)] gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
+    <section id="about" className="px-5 sm:px-8 py-24 md:py-32 border-t border-[var(--border)]">
+      <div className="mx-auto max-w-[1200px] grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
         <div>
-          <SectionTitle label="// 01 ABOUT ME" heading="Who I Am" />
+          <SectionTitle label="About" heading="Who I Am" />
 
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            className="relative border-l-2 border-[var(--accent-cyan)]/30 pl-6"
+            className="space-y-5"
           >
-            {/* Glowing dot at top of border */}
-            <span className="absolute -left-[5px] top-0 h-2 w-2 rounded-full bg-[var(--accent-cyan)] shadow-[0_0_12px_var(--accent-cyan)]" />
-
-            <p className="text-[var(--text-secondary)] text-base leading-relaxed sm:text-lg font-[family-name:var(--font-dm-sans)]">
-              I&apos;m a Computer Engineering student at{" "}
-              <span className="text-white">VGEC</span> with a{" "}
-              <span className="text-[var(--accent-cyan)] font-medium">9.04 CGPA</span>,
-              obsessed with building things that actually work at scale. I write
-              TypeScript by day, think in systems by night, and lead a 20-member
-              team at E-Cell VGEC.
+            <p className="text-[var(--text-secondary)] text-base sm:text-[17px] leading-relaxed">
+              I&apos;m a Computer Engineering student at <span className="text-[var(--text-primary)] font-medium">VGEC</span>, focused on building software that solves real problems. I write TypeScript, design systems, and ship production-ready applications.
             </p>
-            <p className="mt-5 text-[var(--text-dim)] text-base leading-relaxed sm:text-lg font-[family-name:var(--font-dm-sans)]">
-              I&apos;m looking for internship opportunities where I can contribute
-              fast, learn faster, and ship software that matters.
+            <p className="text-[var(--text-secondary)] text-base sm:text-[17px] leading-relaxed">
+              As the lead of a 20-member team at E-Cell VGEC, I&apos;ve organized events for 200+ attendees while maintaining a <span className="text-[var(--accent)] font-semibold">9.04 CGPA</span>.
+            </p>
+            <p className="text-[var(--text-dim)] text-base leading-relaxed">
+              Looking for internship opportunities where I can contribute fast and ship software that matters.
             </p>
           </motion.div>
         </div>
@@ -48,19 +40,13 @@ export function About() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
         >
-          {ABOUT_STATS.map((stat, index) => (
+          {ABOUT_STATS.map((stat) => (
             <motion.div key={stat.label} variants={fadeUp}>
-              <GlassCard hoverGlow={index % 3 === 0 ? "cyan" : index % 3 === 1 ? "violet" : "green"} className="h-full p-6">
-                <div
-                  className="text-5xl leading-none font-[family-name:var(--font-bebas)]"
-                  style={{ color: accentColors[index % accentColors.length] }}
-                >
-                  <AnimatedCounter
-                    target={stat.value}
-                    suffix={stat.suffix}
-                  />
+              <GlassCard className="p-6 h-full">
+                <div className="text-4xl sm:text-5xl font-[800] tracking-tight text-[var(--text-primary)] font-[family-name:var(--font-display)]">
+                  <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                 </div>
-                <p className="mt-3 text-sm text-[var(--text-secondary)] font-[family-name:var(--font-dm-sans)]">
+                <p className="mt-2 text-[13px] text-[var(--text-dim)] font-medium uppercase tracking-wide">
                   {stat.label}
                 </p>
               </GlassCard>

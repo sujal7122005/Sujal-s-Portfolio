@@ -25,9 +25,9 @@ export function Skills() {
             <motion.div
               key={category.title}
               variants={fadeUp}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm"
+              className="rounded-none border border-[var(--border)] bg-[var(--bg-secondary)] p-6"
             >
-              <h3 className="mb-4 text-sm uppercase tracking-[0.2em] text-cyan-300 font-[family-name:var(--font-jetbrains-mono)]">
+              <h3 className="mb-4 text-[12px] uppercase tracking-[0.22em] text-white/60">
                 {category.title}
               </h3>
 

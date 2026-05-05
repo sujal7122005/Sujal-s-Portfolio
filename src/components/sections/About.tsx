@@ -19,15 +19,15 @@ export function About() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            className="border-l-2 border-cyan-300/70 pl-6"
+            className="border-l-2 border-white/25 pl-6"
           >
-            <p className="text-slate-300 text-base leading-relaxed sm:text-lg font-[family-name:var(--font-dm-sans)]">
+            <p className="text-white/70 text-base leading-relaxed sm:text-lg">
               I am a Computer Engineering student at VGEC with a 9.04 CGPA,
               obsessed with building things that actually work at scale. I write
               TypeScript by day, think in systems by night, and lead a 20-member
               team at E-Cell VGEC.
             </p>
-            <p className="mt-5 text-slate-400 text-base leading-relaxed sm:text-lg font-[family-name:var(--font-dm-sans)]">
+            <p className="mt-5 text-white/55 text-base leading-relaxed sm:text-lg">
               I am looking for internship opportunities where I can contribute
               fast, learn faster, and ship software that matters.
             </p>
@@ -44,10 +44,10 @@ export function About() {
           {ABOUT_STATS.map((stat) => (
             <motion.div key={stat.label} variants={fadeUp}>
               <GlassCard hoverGlow="cyan" className="h-full p-6">
-                <div className="text-cyan-200 text-5xl leading-none font-[family-name:var(--font-bebas)]">
+                <div className="text-white text-5xl leading-none font-[family-name:var(--font-bebas)]">
                   <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                 </div>
-                <p className="mt-2 text-sm text-slate-400 font-[family-name:var(--font-dm-sans)]">
+                <p className="mt-2 text-sm text-white/60">
                   {stat.label}
                 </p>
               </GlassCard>

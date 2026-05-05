@@ -1,49 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Bebas_Neue,
-  DM_Sans,
-  JetBrains_Mono,
-  Space_Mono,
-  Syne,
-} from "next/font/google";
-import { CustomCursor } from "@/components/layout/CustomCursor";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import "./globals.css";
-
-const bebasNeue = Bebas_Neue({
-  variable: "--font-bebas",
-  subsets: ["latin"],
-  weight: ["400"],
-  display: "swap",
-});
-
-const spaceMono = Space_Mono({
-  variable: "--font-space-mono",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-});
-
-const syne = Syne({
-  variable: "--font-syne",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -94,7 +51,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#020817",
+  themeColor: "#181818",
   colorScheme: "dark",
 };
 
@@ -106,12 +63,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bebasNeue.variable} ${spaceMono.variable} ${syne.variable} ${dmSans.variable} ${jetBrainsMono.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
       <body className="min-h-full bg-[var(--bg-primary)] text-[var(--text-primary)]">
         <ScrollProgress />
-        <div className="noise-overlay" aria-hidden />
-        <CustomCursor />
         {children}
       </body>
     </html>

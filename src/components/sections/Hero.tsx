@@ -4,16 +4,18 @@ import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { ParticleField } from "@/components/ui/ParticleField";
 import { fadeUp, letterReveal, staggerContainer } from "@/lib/animations";
 import { HERO_ROLES } from "@/lib/constants";
 
-const TechGlobe = dynamic(
-  () => import("@/components/three/TechGlobe").then((mod) => mod.TechGlobe),
+const HeroSculpture = dynamic(
+  () =>
+    import("@/components/three/HeroSculpture").then(
+      (mod) => mod.HeroSculpture,
+    ),
   {
     ssr: false,
     loading: () => (
-      <div className="h-[390px] w-full max-w-[420px] animate-pulse rounded-full border border-cyan-300/20 bg-cyan-300/5" />
+      <div className="h-[360px] w-full animate-pulse border border-white/15 bg-[#181818]" />
     ),
   },
 );
@@ -60,30 +62,42 @@ export function Hero() {
     };
   }, [isDeleting, roleIndex, typedText]);
 
+  const marqueeItems = [
+    "Selected Work",
+    "Product Systems",
+    "Frontend Engineering",
+    "Interaction Design",
+    "Full-Stack Delivery",
+    "Performance Focus",
+  ];
+
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center overflow-hidden bg-[var(--bg-primary)] px-4 pt-28 pb-16 sm:px-6"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[var(--bg-primary)] px-4 pt-28 pb-24 sm:px-6"
     >
-      <ParticleField />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_30%,rgba(0,212,255,0.12),transparent_50%),radial-gradient(circle_at_24%_80%,rgba(124,58,237,0.12),transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-32 right-0 h-[420px] w-[420px] bg-[var(--brand-red)]/20 blur-[160px]" />
+        <div className="absolute bottom-0 left-0 h-[320px] w-[320px] bg-white/10 blur-[140px]" />
+        <div className="absolute inset-0 hero-grid-overlay" />
+      </div>
 
-      <div className="relative mx-auto grid w-[min(94vw,1280px)] items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
+      <div className="relative mx-auto grid w-[min(94vw,1280px)] items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="space-y-6"
+          className="space-y-7"
         >
           <motion.p
             variants={fadeUp}
-            className="text-cyan-300 text-sm sm:text-base font-[family-name:var(--font-jetbrains-mono)]"
+            className="text-[11px] uppercase tracking-[0.28em] text-white/60"
           >
-            {"> Hello World, I'm"}
+            Sujal Patel | Full Stack Developer
           </motion.p>
 
           <motion.h1
-            className="flex flex-wrap text-6xl leading-[0.95] text-slate-100 sm:text-7xl lg:text-[7.5rem] font-[family-name:var(--font-bebas)]"
+            className="flex flex-wrap text-[clamp(3rem,8vw,6.5rem)] leading-[0.95] text-white font-[family-name:var(--font-bebas)]"
             initial="hidden"
             animate="visible"
             variants={{
@@ -101,16 +115,16 @@ export function Hero() {
           <motion.h2
             variants={fadeUp}
             transition={{ delay: 0.8 }}
-            className="min-h-[2.25rem] bg-gradient-to-r from-violet-300 to-cyan-300 bg-clip-text text-2xl text-transparent sm:text-3xl font-[family-name:var(--font-syne)]"
+            className="min-h-[2.25rem] text-[12px] uppercase tracking-[0.22em] text-white/70"
           >
             {typedText}
-            <span className="inline-block h-7 w-[2px] translate-y-1 animate-caret bg-cyan-300" />
+            <span className="inline-block h-6 w-[2px] translate-y-1 animate-caret bg-[var(--brand-red)]" />
           </motion.h2>
 
           <motion.p
             variants={fadeUp}
             transition={{ delay: 1 }}
-            className="max-w-xl text-base text-slate-300 sm:text-lg font-[family-name:var(--font-dm-sans)]"
+            className="max-w-xl text-base text-white/70 sm:text-lg"
           >
             Computer Engineering student at VGEC with a 9.04 CGPA, building
             full-stack products with clean architecture and meaningful user
@@ -120,15 +134,12 @@ export function Hero() {
           <motion.div
             variants={fadeUp}
             transition={{ delay: 1.2 }}
-            className="flex flex-wrap items-center gap-3"
+            className="flex flex-wrap items-center gap-4"
           >
             <MagneticButton href="#projects" variant="filled">
               Explore My Work
             </MagneticButton>
-            <MagneticButton
-              href="/resume"
-              variant="outline"
-            >
+            <MagneticButton href="/resume" variant="outline">
               View Resume
             </MagneticButton>
           </motion.div>
@@ -136,11 +147,11 @@ export function Hero() {
           <motion.div
             variants={fadeUp}
             transition={{ delay: 1.3 }}
-            className="flex items-center gap-2 text-sm text-slate-300 tracking-[0.1em] font-[family-name:var(--font-jetbrains-mono)]"
+            className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/60"
           >
             <span className="relative inline-flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-300/90" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-300" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand-red)]/80" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--brand-red)]" />
             </span>
             Available for SDE / Full-Stack Internships
           </motion.div>
@@ -150,21 +161,31 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.7 }}
-          className="relative mx-auto w-full max-w-[440px]"
+          className="relative mx-auto w-full max-w-[520px]"
         >
-          <div className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-cyan-300/8 blur-3xl" />
-          <TechGlobe />
+          <HeroSculpture />
+          <p className="mt-4 text-[11px] uppercase tracking-[0.22em] text-white/50">
+            Signature motion sculpture
+          </p>
         </motion.div>
       </div>
 
-      <a
-        href="#about"
-        data-cursor-hover="true"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-cyan-300 text-xl"
-        aria-label="Scroll to About"
-      >
-        v
-      </a>
+      <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-[var(--brand-red)]">
+        <div className="hero-marquee">
+          <div className="hero-marquee-track">
+            {marqueeItems.map((item) => (
+              <span key={item} className="hero-marquee-item">
+                {item}
+              </span>
+            ))}
+            {marqueeItems.map((item) => (
+              <span key={`${item}-repeat`} className="hero-marquee-item">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

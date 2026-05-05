@@ -17,10 +17,10 @@ interface MagneticButtonProps {
 
 const variantClassName: Record<MagneticButtonProps["variant"], string> = {
   outline:
-    "border border-cyan-300/60 text-cyan-100 hover:bg-cyan-300/10 hover:shadow-[0_0_24px_rgba(0,212,255,0.22)]",
+    "border border-white/60 text-white hover:bg-white/5",
   filled:
-    "bg-cyan-300 text-slate-950 hover:bg-cyan-200 hover:shadow-[0_0_24px_rgba(0,212,255,0.35)]",
-  ghost: "border border-white/15 text-slate-200 hover:border-cyan-300/40 hover:text-cyan-100",
+    "bg-[var(--brand-red)] text-white hover:bg-[var(--brand-red-active)]",
+  ghost: "text-white/70 hover:text-white",
 };
 
 function isExternalHref(href: string) {
@@ -28,7 +28,7 @@ function isExternalHref(href: string) {
 }
 
 const baseClassName =
-  "group inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm transition-all duration-300 font-[family-name:var(--font-syne)]";
+  "group inline-flex items-center justify-center gap-2 rounded-none px-8 py-3 text-[13px] uppercase tracking-[0.22em] transition-all duration-300 font-[family-name:var(--font-dm-sans)]";
 
 export function MagneticButton({
   children,

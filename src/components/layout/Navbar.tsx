@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MagneticButton } from "@/components/ui/MagneticButton";
@@ -41,78 +42,77 @@ export function Navbar() {
   }, [isMenuOpen]);
 
   const containerClassName = cn(
-    "mx-auto mt-5 w-[min(94vw,920px)] rounded-full border px-4 py-2 transition-all duration-300 md:px-6",
-    "backdrop-blur-xl",
+    "mx-auto flex h-16 w-[min(94vw,1200px)] items-center justify-between border-b border-white/15 px-2 transition-all duration-300 md:px-0",
     isScrolled
-      ? "border-white/15 bg-slate-950/75 shadow-[0_0_30px_rgba(0,212,255,0.12)]"
-      : "border-white/8 bg-slate-950/40",
+      ? "bg-[#181818]/90"
+      : "bg-transparent",
   );
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50">
+      <header className="fixed inset-x-0 top-0 z-50 bg-[#181818]">
         <nav className={containerClassName}>
-          <div className="flex items-center justify-between gap-4">
-            <a
-              href="#hero"
-              className="text-cyan-300 text-lg tracking-[0.2em] font-[family-name:var(--font-space-mono)]"
-              data-cursor-hover="true"
-            >
-              SP
-            </a>
+          <a
+            href="#hero"
+            className="flex items-center gap-3 text-white"
+            data-cursor-hover="true"
+          >
+            <Image
+              src="/Logo%20(2).png"
+              alt="Sujal Patel Logo"
+              width={28}
+              height={28}
+              className="h-7 w-7"
+            />
+            <span className="text-xs uppercase tracking-[0.32em]">Sujal Patel</span>
+          </a>
 
-            <div className="hidden items-center gap-7 md:flex">
-              {NAV_ITEMS.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  data-cursor-hover="true"
-                  className="group relative text-sm text-slate-200/90 transition-colors hover:text-cyan-200 font-[family-name:var(--font-dm-sans)]"
-                >
-                  {item.label}
-                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-cyan-300 transition-all duration-300 group-hover:w-full" />
-                </a>
-              ))}
-            </div>
-
-            <div className="hidden md:block">
-              <MagneticButton
-                href="/resume"
-                variant="outline"
-                className="text-xs"
+          <div className="hidden items-center gap-8 md:flex">
+            {NAV_ITEMS.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                data-cursor-hover="true"
+                className="text-[12px] uppercase tracking-[0.22em] text-white/75 transition-colors hover:text-white"
               >
-                Download CV
-              </MagneticButton>
-            </div>
-
-            <button
-              type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-slate-100 md:hidden"
-              onClick={() => setIsMenuOpen((prev) => !prev)}
-              aria-label="Toggle menu"
-            >
-              <span className="relative block h-4 w-4">
-                <span
-                  className={cn(
-                    "absolute left-0 top-[2px] h-0.5 w-4 bg-current transition-transform duration-300",
-                    isMenuOpen && "translate-y-[5px] rotate-45",
-                  )}
-                />
-                <span
-                  className={cn(
-                    "absolute left-0 top-[7px] h-0.5 w-4 bg-current transition-opacity duration-300",
-                    isMenuOpen && "opacity-0",
-                  )}
-                />
-                <span
-                  className={cn(
-                    "absolute left-0 top-[12px] h-0.5 w-4 bg-current transition-transform duration-300",
-                    isMenuOpen && "-translate-y-[5px] -rotate-45",
-                  )}
-                />
-              </span>
-            </button>
+                {item.label}
+              </a>
+            ))}
           </div>
+
+          <div className="hidden md:block">
+            <MagneticButton href="/resume" variant="outline" className="text-[11px]">
+              Download CV
+            </MagneticButton>
+          </div>
+
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-none border border-white/20 text-white md:hidden"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            aria-label="Toggle menu"
+          >
+            <span className="relative block h-4 w-4">
+              <span
+                className={cn(
+                  "absolute left-0 top-[2px] h-0.5 w-4 bg-current transition-transform duration-300",
+                  isMenuOpen && "translate-y-[5px] rotate-45",
+                )}
+              />
+              <span
+                className={cn(
+                  "absolute left-0 top-[7px] h-0.5 w-4 bg-current transition-opacity duration-300",
+                  isMenuOpen && "opacity-0",
+                )}
+              />
+              <span
+                className={cn(
+                  "absolute left-0 top-[12px] h-0.5 w-4 bg-current transition-transform duration-300",
+                  isMenuOpen && "-translate-y-[5px] -rotate-45",
+                )}
+              />
+            </span>
+          </button>
         </nav>
       </header>
 
@@ -123,7 +123,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -24 }}
             transition={{ duration: 0.24 }}
-            className="fixed inset-0 z-40 flex items-center justify-center bg-slate-950/95 md:hidden"
+            className="fixed inset-0 z-40 flex items-center justify-center bg-[#181818] md:hidden"
           >
             <div className="flex flex-col items-center gap-6">
               {NAV_ITEMS.map((item, index) => (
@@ -135,7 +135,7 @@ export function Navbar() {
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.06 * index, duration: 0.3 }}
-                  className="text-2xl text-slate-100 font-[family-name:var(--font-syne)]"
+                  className="text-2xl uppercase tracking-[0.2em] text-white"
                 >
                   {item.label}
                 </motion.a>

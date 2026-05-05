@@ -8,9 +8,9 @@ import { fadeUp, staggerContainer } from "@/lib/animations";
 import { PROJECTS } from "@/lib/constants";
 
 const accentBackground = {
-  cyan: "from-cyan-400/20 to-cyan-200/5",
-  violet: "from-violet-400/20 to-violet-200/5",
-  green: "from-emerald-400/20 to-emerald-200/5",
+  cyan: "from-white/5 to-transparent",
+  violet: "from-white/5 to-transparent",
+  green: "from-white/5 to-transparent",
 };
 
 export function Projects() {
@@ -41,13 +41,13 @@ export function Projects() {
 
                 <div className="grid gap-8 lg:grid-cols-[1.3fr_0.9fr] lg:items-center">
                   <div>
-                    <p className="text-xs tracking-[0.2em] text-cyan-300 font-[family-name:var(--font-jetbrains-mono)]">
+                    <p className="text-[11px] uppercase tracking-[0.2em] text-white/60">
                       [{String(project.id).padStart(2, "0")}] {project.tagline}
                     </p>
-                    <h3 className="mt-3 text-3xl text-slate-100 sm:text-4xl font-[family-name:var(--font-syne)]">
+                    <h3 className="mt-3 text-3xl text-white sm:text-4xl font-[family-name:var(--font-syne)]">
                       {project.name}
                     </h3>
-                    <p className="mt-4 text-slate-300 leading-relaxed font-[family-name:var(--font-dm-sans)]">
+                    <p className="mt-4 text-white/70 leading-relaxed">
                       {project.description}
                     </p>
 
@@ -55,17 +55,17 @@ export function Projects() {
                       {project.tech.map((tech) => (
                         <span
                           key={tech}
-                          className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-slate-300 font-[family-name:var(--font-jetbrains-mono)]"
+                          className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.12em] text-white/70"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
 
-                    <ul className="mt-5 space-y-2 text-slate-300 text-sm sm:text-base font-[family-name:var(--font-dm-sans)]">
+                    <ul className="mt-5 space-y-2 text-white/70 text-sm sm:text-base">
                       {project.highlights.map((point) => (
                         <li key={point} className="flex items-start gap-2">
-                          <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-cyan-300" />
+                          <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-[var(--brand-red)]" />
                           <span>{point}</span>
                         </li>
                       ))}
@@ -80,7 +80,7 @@ export function Projects() {
                           Live Demo
                         </MagneticButton>
                       )}
-                      <span className="ml-1 text-xl text-cyan-200 transition-transform duration-300 group-hover:translate-x-2">
+                      <span className="ml-1 text-xl text-white/50 transition-transform duration-300 group-hover:translate-x-2">
                         ----
                       </span>
                     </div>
@@ -89,13 +89,13 @@ export function Projects() {
                   <motion.div
                     whileHover={{ y: -4, x: 4 }}
                     transition={{ type: "spring", stiffness: 220, damping: 18 }}
-                    className={`relative min-h-[230px] rounded-2xl border border-white/10 bg-gradient-to-br ${accentBackground[project.accent]} p-6`}
+                    className={`relative min-h-[230px] rounded-none border border-[var(--border)] bg-gradient-to-br ${accentBackground[project.accent]} p-6`}
                   >
-                    <div className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.2),transparent_55%)]" />
-                    <p className="relative text-xs tracking-[0.18em] text-slate-300 font-[family-name:var(--font-jetbrains-mono)]">
+                    <div className="absolute inset-0 rounded-none bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.1),transparent_55%)]" />
+                    <p className="relative text-[11px] uppercase tracking-[0.2em] text-white/60">
                       FEATURED PROJECT
                     </p>
-                    <h4 className="relative mt-6 text-4xl text-slate-100/85 sm:text-5xl font-[family-name:var(--font-bebas)]">
+                    <h4 className="relative mt-6 text-4xl text-white/85 sm:text-5xl font-[family-name:var(--font-bebas)]">
                       {project.name}
                     </h4>
                   </motion.div>

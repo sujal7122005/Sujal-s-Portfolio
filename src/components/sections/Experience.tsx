@@ -18,7 +18,7 @@ export function Experience() {
 
         <div className="relative mt-12 space-y-8">
           <motion.div
-            className="absolute bottom-0 left-4 top-0 w-px origin-top bg-gradient-to-b from-transparent via-cyan-300/80 to-transparent md:left-1/2"
+            className="absolute bottom-0 left-4 top-0 w-px origin-top bg-gradient-to-b from-transparent via-white/40 to-transparent md:left-1/2"
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -43,33 +43,33 @@ export function Experience() {
               >
                 <span
                   className={cn(
-                    "absolute top-8 h-3 w-3 rounded-full border border-cyan-200 bg-cyan-300 shadow-[0_0_16px_rgba(0,212,255,0.6)]",
+                    "absolute top-8 h-3 w-3 rounded-full border border-white/60 bg-[var(--brand-red)]",
                     right ? "left-[10px] md:-left-[6px]" : "left-[10px] md:-right-[6px]",
                   )}
                 />
 
                 <GlassCard hoverGlow="cyan" className="p-6">
-                  <p className="text-xs tracking-[0.18em] text-cyan-300 font-[family-name:var(--font-jetbrains-mono)]">
+                  <p className="text-[11px] uppercase tracking-[0.2em] text-white/60">
                     {item.period}
                   </p>
-                  <h3 className="mt-2 text-xl text-slate-100 font-[family-name:var(--font-syne)]">
+                  <h3 className="mt-2 text-xl text-white">
                     {item.title}
                   </h3>
-                  <p className="mt-1 text-slate-400 text-sm font-[family-name:var(--font-dm-sans)]">
+                  <p className="mt-1 text-white/60 text-sm">
                     {item.organization}
                   </p>
 
                   {item.subtitle && (
-                    <p className="mt-2 text-slate-300 text-sm font-[family-name:var(--font-dm-sans)]">
+                    <p className="mt-2 text-white/70 text-sm">
                       {item.subtitle}
                     </p>
                   )}
 
                   {item.bullets && (
-                    <ul className="mt-4 space-y-2 text-slate-300 text-sm font-[family-name:var(--font-dm-sans)]">
+                    <ul className="mt-4 space-y-2 text-white/70 text-sm">
                       {item.bullets.map((bullet) => (
                         <li key={bullet} className="flex items-start gap-2">
-                          <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-cyan-300" />
+                          <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-[var(--brand-red)]" />
                           <span>{bullet}</span>
                         </li>
                       ))}

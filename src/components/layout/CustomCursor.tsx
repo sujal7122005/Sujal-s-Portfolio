@@ -79,8 +79,8 @@ export function CustomCursor() {
       <div
         ref={dotRef}
         className={cn(
-          "custom-cursor-layer pointer-events-none fixed left-0 top-0 z-[9998] h-2 w-2 rounded-full bg-cyan-300",
-          "shadow-[0_0_14px_rgba(0,212,255,0.95)] transition-transform duration-75",
+          "custom-cursor-layer pointer-events-none fixed left-0 top-0 z-[9998] h-2 w-2 rounded-full bg-red-400",
+          "shadow-[0_0_14px_rgba(255,51,51,0.95)] transition-transform duration-75",
           clicked && "scale-75",
         )}
       />
@@ -89,7 +89,7 @@ export function CustomCursor() {
         className={cn(
           "custom-cursor-layer pointer-events-none fixed left-0 top-0 z-[9997] h-8 w-8 rounded-full border border-white/35",
           "transition-[width,height,background-color,border-color,transform] duration-150",
-          hovered && "h-12 w-12 border-cyan-300/70 bg-cyan-300/10",
+          hovered && "h-12 w-12 border-red-400/70 bg-red-400/10",
           clicked && "scale-90",
         )}
       />

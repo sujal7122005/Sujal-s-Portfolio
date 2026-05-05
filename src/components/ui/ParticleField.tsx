@@ -10,8 +10,8 @@ type Particle = {
   size: number;
 };
 
-const CONNECTION_DISTANCE = 120;
-const REPULSE_DISTANCE = 80;
+const CONNECTION_DISTANCE = 130;
+const REPULSE_DISTANCE = 90;
 
 export function ParticleField() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -35,15 +35,15 @@ export function ParticleField() {
 
     const mouse = { x: -9999, y: -9999 };
 
-    const particleCount = () => (window.innerWidth < 768 ? 40 : 90);
+    const particleCount = () => (window.innerWidth < 768 ? 35 : 80);
 
     const createParticles = () => {
       particles = Array.from({ length: particleCount() }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        size: Math.random() * 1.4 + 0.8,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 1.5 + 0.6,
       }));
     };
 
@@ -69,15 +69,15 @@ export function ParticleField() {
 
         if (mouseDistance < REPULSE_DISTANCE) {
           const force = (REPULSE_DISTANCE - mouseDistance) / REPULSE_DISTANCE;
-          particle.vx += (dxMouse / (mouseDistance || 1)) * force * 0.18;
-          particle.vy += (dyMouse / (mouseDistance || 1)) * force * 0.18;
+          particle.vx += (dxMouse / (mouseDistance || 1)) * force * 0.15;
+          particle.vy += (dyMouse / (mouseDistance || 1)) * force * 0.15;
         }
 
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        particle.vx *= 0.985;
-        particle.vy *= 0.985;
+        particle.vx *= 0.988;
+        particle.vy *= 0.988;
 
         if (particle.x <= 0 || particle.x >= width) particle.vx *= -1;
         if (particle.y <= 0 || particle.y >= height) particle.vy *= -1;
@@ -87,7 +87,7 @@ export function ParticleField() {
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(0, 212, 255, 0.35)";
+        ctx.fillStyle = "rgba(255, 51, 51, 0.3)";
         ctx.fill();
       }
 
@@ -98,9 +98,9 @@ export function ParticleField() {
           const distance = Math.hypot(a.x - b.x, a.y - b.y);
 
           if (distance < CONNECTION_DISTANCE) {
-            const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.22;
-            ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
-            ctx.lineWidth = 1;
+            const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.18;
+            ctx.strokeStyle = `rgba(255, 51, 51, ${opacity})`;
+            ctx.lineWidth = 0.8;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);

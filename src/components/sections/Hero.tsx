@@ -15,7 +15,9 @@ const HeroSculpture = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="h-[360px] w-full animate-pulse border border-white/15 bg-[#181818]" />
+      <div className="flex h-[380px] w-full items-center justify-center lg:h-[440px]">
+        <div className="h-40 w-40 animate-pulse rounded-full bg-[var(--accent-cyan)]/5 border border-[var(--accent-cyan)]/10" />
+      </div>
     ),
   },
 );
@@ -54,7 +56,7 @@ export function Hero() {
         setIsDeleting(false);
         setRoleIndex((prev) => (prev + 1) % HERO_ROLES.length);
       },
-      isFullyTyped && !isDeleting ? 1100 : isDeleting ? 45 : 90,
+      isFullyTyped && !isDeleting ? 1400 : isDeleting ? 40 : 80,
     );
 
     return () => {
@@ -63,41 +65,43 @@ export function Hero() {
   }, [isDeleting, roleIndex, typedText]);
 
   const marqueeItems = [
-    "Selected Work",
-    "Product Systems",
-    "Frontend Engineering",
-    "Interaction Design",
-    "Full-Stack Delivery",
-    "Performance Focus",
+    "Software Engineering",
+    "System Design",
+    "Full-Stack Development",
+    "Clean Architecture",
+    "Performance Optimization",
+    "Problem Solving",
   ];
 
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[var(--bg-primary)] px-4 pt-28 pb-24 sm:px-6"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[var(--bg-primary)] px-4 pt-24 pb-20 sm:px-6 lg:pt-28 lg:pb-24"
     >
+      {/* Ambient glow backgrounds */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-32 right-0 h-[420px] w-[420px] bg-[var(--brand-red)]/20 blur-[160px]" />
-        <div className="absolute bottom-0 left-0 h-[320px] w-[320px] bg-white/10 blur-[140px]" />
-        <div className="absolute inset-0 hero-grid-overlay" />
+        <div className="absolute -top-32 -right-20 h-[500px] w-[500px] bg-[var(--accent-cyan)]/[0.06] blur-[180px]" />
+        <div className="absolute -bottom-20 -left-20 h-[400px] w-[400px] bg-[var(--accent-violet)]/[0.08] blur-[160px]" />
       </div>
 
-      <div className="relative mx-auto grid w-[min(94vw,1280px)] items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
+      <div className="relative mx-auto grid w-[min(94vw,1280px)] items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-12">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="space-y-7"
+          className="space-y-6 text-center lg:text-left"
         >
+          {/* Greeting line */}
           <motion.p
             variants={fadeUp}
-            className="text-[11px] uppercase tracking-[0.28em] text-white/60"
+            className="text-[12px] uppercase tracking-[0.3em] text-[var(--accent-cyan)] font-[family-name:var(--font-jetbrains-mono)]"
           >
-            Sujal Patel | Full Stack Developer
+            &gt; Hello World, I&apos;m
           </motion.p>
 
+          {/* Name — letter by letter reveal */}
           <motion.h1
-            className="flex flex-wrap text-[clamp(3rem,8vw,6.5rem)] leading-[0.95] text-white font-[family-name:var(--font-bebas)]"
+            className="flex flex-wrap justify-center text-[clamp(3rem,9vw,7rem)] leading-[0.95] text-white font-[family-name:var(--font-bebas)] lg:justify-start"
             initial="hidden"
             animate="visible"
             variants={{
@@ -112,29 +116,34 @@ export function Hero() {
             ))}
           </motion.h1>
 
+          {/* Typewriter subtitle */}
           <motion.h2
             variants={fadeUp}
             transition={{ delay: 0.8 }}
-            className="min-h-[2.25rem] text-[12px] uppercase tracking-[0.22em] text-white/70"
+            className="min-h-[2.5rem] text-[14px] uppercase tracking-[0.2em] font-[family-name:var(--font-syne)]"
           >
-            {typedText}
-            <span className="inline-block h-6 w-[2px] translate-y-1 animate-caret bg-[var(--brand-red)]" />
+            <span className="bg-gradient-to-r from-[var(--accent-violet)] to-[var(--accent-cyan)] bg-clip-text text-transparent">
+              {typedText}
+            </span>
+            <span className="inline-block h-5 w-[2px] translate-y-0.5 animate-caret bg-[var(--accent-cyan)]" />
           </motion.h2>
 
+          {/* Description */}
           <motion.p
             variants={fadeUp}
             transition={{ delay: 1 }}
-            className="max-w-xl text-base text-white/70 sm:text-lg"
+            className="mx-auto max-w-xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg lg:mx-0"
           >
-            Computer Engineering student at VGEC with a 9.04 CGPA, building
+            Computer Engineering student at VGEC with a <span className="text-white font-medium">9.04 CGPA</span>, building
             full-stack products with clean architecture and meaningful user
             impact.
           </motion.p>
 
+          {/* CTAs */}
           <motion.div
             variants={fadeUp}
             transition={{ delay: 1.2 }}
-            className="flex flex-wrap items-center gap-4"
+            className="flex flex-wrap items-center justify-center gap-4 lg:justify-start"
           >
             <MagneticButton href="#projects" variant="filled">
               Explore My Work
@@ -144,43 +153,56 @@ export function Hero() {
             </MagneticButton>
           </motion.div>
 
+          {/* Availability badge */}
           <motion.div
             variants={fadeUp}
             transition={{ delay: 1.3 }}
-            className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/60"
+            className="flex items-center justify-center gap-2 text-[11px] uppercase tracking-[0.22em] text-[var(--text-secondary)] lg:justify-start"
           >
             <span className="relative inline-flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand-red)]/80" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--brand-red)]" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent-green)]/60" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--accent-green)]" />
             </span>
             Available for SDE / Full-Stack Internships
           </motion.div>
         </motion.div>
 
+        {/* 3D Sculpture */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.7 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
           className="relative mx-auto w-full max-w-[520px]"
         >
           <HeroSculpture />
-          <p className="mt-4 text-[11px] uppercase tracking-[0.22em] text-white/50">
-            Signature motion sculpture
-          </p>
         </motion.div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-[var(--brand-red)]">
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2 }}
+          className="flex flex-col items-center gap-2 text-[var(--text-dim)]"
+        >
+          <span className="text-[10px] uppercase tracking-[0.3em] font-[family-name:var(--font-jetbrains-mono)]">scroll</span>
+          <span className="animate-scroll-bounce text-lg">↓</span>
+        </motion.div>
+      </div>
+
+      {/* Bottom marquee */}
+      <div className="absolute bottom-0 left-0 right-0 border-t border-white/[0.06] bg-gradient-to-r from-[var(--accent-cyan)]/10 via-[var(--accent-violet)]/10 to-[var(--accent-cyan)]/10">
         <div className="hero-marquee">
           <div className="hero-marquee-track">
             {marqueeItems.map((item) => (
               <span key={item} className="hero-marquee-item">
-                {item}
+                ◆ {item}
               </span>
             ))}
             {marqueeItems.map((item) => (
               <span key={`${item}-repeat`} className="hero-marquee-item">
-                {item}
+                ◆ {item}
               </span>
             ))}
           </div>

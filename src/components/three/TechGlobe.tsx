@@ -61,7 +61,7 @@ export function TechGlobe() {
 
     const geometry = new THREE.SphereGeometry(2.5, 32, 32);
     const material = new THREE.MeshBasicMaterial({
-      color: "#00d4ff",
+      color: "#FF3333",
       wireframe: true,
       transparent: true,
       opacity: 0.22,
@@ -72,7 +72,7 @@ export function TechGlobe() {
 
     const glowGeometry = new THREE.SphereGeometry(2.9, 24, 24);
     const glowMaterial = new THREE.MeshBasicMaterial({
-      color: "#00d4ff",
+      color: "#FF3333",
       transparent: true,
       opacity: 0.06,
     });
@@ -161,8 +161,8 @@ export function TechGlobe() {
   if (isMobile) {
     return (
       <div className="relative mx-auto h-[280px] w-[280px]">
-        <div className="absolute inset-0 rounded-full bg-[conic-gradient(from_180deg_at_50%_50%,rgba(0,212,255,0.55),rgba(124,58,237,0.3),rgba(0,212,255,0.55))] blur-md" />
-        <div className="absolute inset-6 animate-spin-slow rounded-full border border-cyan-300/40 bg-[radial-gradient(circle_at_30%_30%,rgba(0,212,255,0.3),rgba(2,8,23,0.2)_55%,transparent_80%)]" />
+        <div className="absolute inset-0 rounded-full bg-[conic-gradient(from_180deg_at_50%_50%,rgba(255,51,51,0.55),rgba(124,58,237,0.3),rgba(255,51,51,0.55))] blur-md" />
+        <div className="absolute inset-6 animate-spin-slow rounded-full border border-red-400/40 bg-[radial-gradient(circle_at_30%_30%,rgba(255,51,51,0.3),rgba(2,8,23,0.2)_55%,transparent_80%)]" />
       </div>
     );
   }
@@ -176,7 +176,7 @@ export function TechGlobe() {
           ref={(node) => {
             labelRefs.current[index] = node;
           }}
-          className="pointer-events-none absolute left-0 top-0 whitespace-nowrap rounded-full border border-white/20 bg-slate-900/75 px-2 py-1 text-[11px] text-cyan-200 backdrop-blur-sm font-[family-name:var(--font-jetbrains-mono)]"
+          className="pointer-events-none absolute left-0 top-0 whitespace-nowrap rounded-full border border-white/20 bg-slate-900/75 px-2 py-1 text-[11px] text-red-200 backdrop-blur-sm font-[family-name:var(--font-jetbrains-mono)]"
         >
           {label}
         </span>

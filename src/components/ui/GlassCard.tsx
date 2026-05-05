@@ -13,15 +13,14 @@ interface GlassCardProps {
 }
 
 const glowClasses: Record<NonNullable<GlassCardProps["hoverGlow"]>, string> = {
-  cyan: "hover:border-white/40",
-  violet:
-    "hover:border-white/40",
-  green: "hover:border-white/40",
+  cyan: "hover:border-[rgba(255,51,51,0.3)] hover:shadow-[0_0_30px_rgba(255,51,51,0.08)]",
+  violet: "hover:border-[rgba(124,58,237,0.3)] hover:shadow-[0_0_30px_rgba(124,58,237,0.08)]",
+  green: "hover:border-[rgba(0,255,136,0.3)] hover:shadow-[0_0_30px_rgba(0,255,136,0.08)]",
   none: "",
 };
 
 const baseClassName =
-  "rounded-none border border-[var(--border)] bg-[var(--bg-secondary)] transition-all duration-300";
+  "rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] backdrop-blur-md transition-all duration-300";
 
 export function GlassCard({
   children,

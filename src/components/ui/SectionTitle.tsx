@@ -18,7 +18,7 @@ export function SectionTitle({
   return (
     <motion.div
       className={cn(
-        "mb-10 flex flex-col gap-3",
+        "mb-12 flex flex-col gap-3",
         align === "center" ? "items-center text-center" : "items-start text-left",
       )}
       variants={fadeUp}
@@ -26,10 +26,10 @@ export function SectionTitle({
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
-      <p className="text-[11px] uppercase tracking-[0.22em] text-white/60 font-[family-name:var(--font-dm-sans)]">
+      <p className="text-[12px] uppercase tracking-[0.28em] text-[var(--accent-cyan)] font-[family-name:var(--font-jetbrains-mono)]">
         {label}
       </p>
-      <h2 className="text-3xl leading-tight text-white sm:text-4xl lg:text-5xl font-[family-name:var(--font-bebas)]">
+      <h2 className="text-3xl leading-tight text-white sm:text-4xl lg:text-5xl font-[family-name:var(--font-space-mono)] font-bold">
         {heading}
       </h2>
     </motion.div>

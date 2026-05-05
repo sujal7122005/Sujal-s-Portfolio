@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { fadeUp } from "@/lib/animations";
 import { CONTACT_DETAILS, SOCIAL_LINKS } from "@/lib/constants";
 
 const contactSchema = z.object({
@@ -75,89 +77,101 @@ export function Contact() {
     }
   };
 
+  const inputBaseClass =
+    "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white outline-none transition-all duration-300 focus:border-[var(--accent-cyan)]/50 focus:shadow-[0_0_15px_rgba(255,51,51,0.08)] font-[family-name:var(--font-dm-sans)] placeholder:text-white/20";
+
   return (
-    <section id="contact" className="bg-[var(--bg-primary)] px-4 py-24 sm:px-6 md:py-32">
+    <section id="contact" className="bg-[var(--bg-primary)] px-4 py-20 sm:px-6 md:py-32">
       <div className="mx-auto w-[min(94vw,1200px)]">
         <SectionTitle label="// 06 CONTACT" heading="Let's Connect" />
-        <p className="max-w-2xl text-white/70 text-base sm:text-lg">
+        <p className="-mt-6 mb-10 max-w-2xl text-[var(--text-secondary)] text-base sm:text-lg font-[family-name:var(--font-dm-sans)]">
           Open to SDE and Full-Stack internship opportunities. Whether you have a
-          role, a project, or just want to talk tech, my inbox is open.
+          role, a project, or just want to talk tech — my inbox is open.
         </p>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <form
+        <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-8">
+          {/* Contact Form */}
+          <motion.form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-4 border border-white/15 bg-[var(--bg-secondary)] p-6"
+            className="space-y-4 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 sm:p-6 md:p-8"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
           >
             <div className="space-y-2">
               <label
                 htmlFor="name"
-                className="text-[12px] uppercase tracking-[0.2em] text-white/60"
+                className="text-[12px] uppercase tracking-[0.22em] text-[var(--text-dim)] font-[family-name:var(--font-jetbrains-mono)]"
               >
                 Name
               </label>
               <input
                 id="name"
                 type="text"
+                placeholder="Your name"
                 {...register("name")}
-                className="w-full rounded-sm border border-white/20 bg-[#181818] px-4 py-3 text-white outline-none transition focus:border-white/60"
+                className={inputBaseClass}
               />
               {errors.name && (
-                <p className="text-sm text-[var(--brand-red)]">{errors.name.message}</p>
+                <p className="text-sm text-red-400">{errors.name.message}</p>
               )}
             </div>
 
             <div className="space-y-2">
               <label
                 htmlFor="email"
-                className="text-[12px] uppercase tracking-[0.2em] text-white/60"
+                className="text-[12px] uppercase tracking-[0.22em] text-[var(--text-dim)] font-[family-name:var(--font-jetbrains-mono)]"
               >
                 Email
               </label>
               <input
                 id="email"
                 type="email"
+                placeholder="your@email.com"
                 {...register("email")}
-                className="w-full rounded-sm border border-white/20 bg-[#181818] px-4 py-3 text-white outline-none transition focus:border-white/60"
+                className={inputBaseClass}
               />
               {errors.email && (
-                <p className="text-sm text-[var(--brand-red)]">{errors.email.message}</p>
+                <p className="text-sm text-red-400">{errors.email.message}</p>
               )}
             </div>
 
             <div className="space-y-2">
               <label
                 htmlFor="subject"
-                className="text-[12px] uppercase tracking-[0.2em] text-white/60"
+                className="text-[12px] uppercase tracking-[0.22em] text-[var(--text-dim)] font-[family-name:var(--font-jetbrains-mono)]"
               >
                 Subject
               </label>
               <input
                 id="subject"
                 type="text"
+                placeholder="What's this about?"
                 {...register("subject")}
-                className="w-full rounded-sm border border-white/20 bg-[#181818] px-4 py-3 text-white outline-none transition focus:border-white/60"
+                className={inputBaseClass}
               />
               {errors.subject && (
-                <p className="text-sm text-[var(--brand-red)]">{errors.subject.message}</p>
+                <p className="text-sm text-red-400">{errors.subject.message}</p>
               )}
             </div>
 
             <div className="space-y-2">
               <label
                 htmlFor="message"
-                className="text-[12px] uppercase tracking-[0.2em] text-white/60"
+                className="text-[12px] uppercase tracking-[0.22em] text-[var(--text-dim)] font-[family-name:var(--font-jetbrains-mono)]"
               >
                 Message
               </label>
               <textarea
                 id="message"
                 rows={5}
+                placeholder="Tell me about your project or opportunity..."
                 {...register("message")}
-                className="w-full resize-none rounded-sm border border-white/20 bg-[#181818] px-4 py-3 text-white outline-none transition focus:border-white/60"
+                className={`${inputBaseClass} resize-none`}
               />
               {errors.message && (
-                <p className="text-sm text-[var(--brand-red)]">{errors.message.message}</p>
+                <p className="text-sm text-red-400">{errors.message.message}</p>
               )}
             </div>
 
@@ -167,55 +181,90 @@ export function Contact() {
               disabled={isSubmitting}
               className="w-full justify-center sm:w-auto"
             >
-              {isSubmitting ? "Sending..." : "Send Message"}
+              {isSubmitting ? (
+                <span className="flex items-center gap-2">
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                  Sending...
+                </span>
+              ) : (
+                "Send Message →"
+              )}
             </MagneticButton>
 
             {feedback && (
               <p
                 className={`text-sm ${
-                  status === "success" ? "text-white/70" : "text-[var(--brand-red)]"
+                  status === "success" ? "text-[var(--accent-green)]" : "text-red-400"
                 }`}
               >
+                {status === "success" ? "✓ " : "✗ "}
                 {feedback}
               </p>
             )}
-          </form>
+          </motion.form>
 
-          <aside className="border border-white/15 bg-[var(--bg-secondary)] p-6">
-            <div className="space-y-4 text-white/70">
-              <p>
-                <span className="text-white/50">Email:</span> {CONTACT_DETAILS.email}
-              </p>
-              <p>
-                <span className="text-white/50">Phone:</span> {CONTACT_DETAILS.phone}
-              </p>
+          {/* Contact Info */}
+          <motion.aside
+            className="space-y-6"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            {/* Contact details */}
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 sm:p-6">
+              <h3 className="text-[12px] uppercase tracking-[0.22em] text-[var(--text-dim)] font-[family-name:var(--font-jetbrains-mono)] mb-4">
+                Contact Info
+              </h3>
+              <div className="space-y-3 text-[var(--text-secondary)] font-[family-name:var(--font-dm-sans)]">
+                <p className="flex items-center gap-3">
+                  <span className="text-[var(--accent-cyan)]">📧</span>
+                  <a href={`mailto:${CONTACT_DETAILS.email}`} className="transition-colors hover:text-[var(--accent-cyan)]">
+                    {CONTACT_DETAILS.email}
+                  </a>
+                </p>
+                <p className="flex items-center gap-3">
+                  <span className="text-[var(--accent-cyan)]">📱</span>
+                  <a href={`tel:${CONTACT_DETAILS.phone}`} className="transition-colors hover:text-[var(--accent-cyan)]">
+                    {CONTACT_DETAILS.phone}
+                  </a>
+                </p>
+              </div>
             </div>
 
-            <div className="mt-8">
-              <p className="text-[11px] uppercase tracking-[0.22em] text-white/50">
-                FIND ME ON
-              </p>
-              <div className="mt-3 flex flex-wrap gap-3">
+            {/* Social links */}
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 sm:p-6">
+              <h3 className="text-[12px] uppercase tracking-[0.22em] text-[var(--text-dim)] font-[family-name:var(--font-jetbrains-mono)] mb-4">
+                Find Me On
+              </h3>
+              <div className="flex flex-wrap gap-3">
                 {SOCIAL_LINKS.map((social) => (
                   <MagneticButton
                     key={social.label}
                     href={social.url}
-                    variant="ghost"
+                    variant="outline"
                     className="px-4 py-2 text-[11px]"
                   >
-                    {social.label}
+                    {social.label} ↗
                   </MagneticButton>
                 ))}
               </div>
             </div>
 
-            <div className="mt-8 border border-white/15 bg-[#181818] p-4">
-              <p className="flex items-center gap-2 text-white/70 text-sm">
-                <span className="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--brand-red)]" />
+            {/* Availability status */}
+            <div className="rounded-2xl border border-[var(--accent-green)]/15 bg-[var(--accent-green)]/[0.03] p-5 sm:p-6">
+              <p className="flex items-center gap-3 text-[var(--text-primary)] text-sm font-[family-name:var(--font-dm-sans)]">
+                <span className="relative inline-flex h-3 w-3">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent-green)]/60" />
+                  <span className="relative inline-flex h-3 w-3 rounded-full bg-[var(--accent-green)]" />
+                </span>
                 {CONTACT_DETAILS.status}
               </p>
+              <p className="mt-2 text-[var(--text-dim)] text-xs font-[family-name:var(--font-dm-sans)]">
+                Currently seeking opportunities for Summer 2026
+              </p>
             </div>
-          </aside>
+          </motion.aside>
         </div>
       </div>
     </section>

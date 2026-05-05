@@ -11,34 +11,34 @@ interface NeonBadgeProps {
 }
 
 const colorClasses = {
-  cyan: "hover:border-white/40",
+  cyan: "hover:border-[var(--accent-cyan)]/50 hover:text-[var(--accent-cyan)] hover:shadow-[0_0_14px_rgba(255,51,51,0.15)]",
   violet:
-    "hover:border-white/40",
+    "hover:border-[var(--accent-violet)]/50 hover:text-[var(--accent-violet)] hover:shadow-[0_0_14px_rgba(124,58,237,0.15)]",
   green:
-    "hover:border-white/40",
+    "hover:border-[var(--accent-green)]/50 hover:text-[var(--accent-green)] hover:shadow-[0_0_14px_rgba(0,255,136,0.15)]",
 };
 
 export function NeonBadge({ label, icon, color = "cyan" }: NeonBadgeProps) {
   return (
     <motion.span
       className={cn(
-        "inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-white/70 transition-all",
-        "font-[family-name:var(--font-dm-sans)]",
+        "inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[12px] tracking-[0.08em] text-[var(--text-secondary)] transition-all duration-300",
+        "font-[family-name:var(--font-jetbrains-mono)]",
         colorClasses[color],
       )}
-      whileHover={{ scale: 1.03, y: -1 }}
+      whileHover={{ scale: 1.04, y: -2 }}
       transition={{ type: "spring", stiffness: 260, damping: 18 }}
     >
       {icon ? (
         <Image
           src={icon}
           alt=""
-          width={12}
-          height={12}
-          className="h-3 w-3 opacity-80"
+          width={14}
+          height={14}
+          className="h-3.5 w-3.5 opacity-80"
         />
       ) : (
-        <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-white/25 text-[9px]">
+        <span className="inline-flex h-5 w-5 items-center justify-center rounded-md border border-white/15 bg-white/[0.06] text-[9px] font-medium">
           {label[0]}
         </span>
       )}

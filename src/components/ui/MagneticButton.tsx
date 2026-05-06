@@ -13,6 +13,7 @@ interface MagneticButtonProps {
   className?: string;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
+  suppressHydrationWarning?: boolean;
 }
 
 const variants: Record<MagneticButtonProps["variant"], string> = {
@@ -28,7 +29,7 @@ function isExternal(href: string) {
 const base = "inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-[13px] font-medium tracking-wide transition-all duration-200 font-[family-name:var(--font-sans)]";
 
 export function MagneticButton({
-  children, variant, href, onClick, className, type = "button", disabled = false,
+  children, variant, href, onClick, className, type = "button", disabled = false, suppressHydrationWarning,
 }: MagneticButtonProps) {
   const { x, y, onMouseMove, onMouseLeave } = useMagneticEffect();
 
@@ -59,6 +60,7 @@ export function MagneticButton({
       style={{ x, y }}
       disabled={disabled}
       className={cls}
+      suppressHydrationWarning={suppressHydrationWarning}
     >
       {children}
     </motion.button>

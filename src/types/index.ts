@@ -1,4 +1,4 @@
-export type AccentColor = "cyan" | "violet" | "green";
+export type AccentColor = "cyan" | "orange" | "violet" | "green";
 
 export interface NavItem {
   label: string;

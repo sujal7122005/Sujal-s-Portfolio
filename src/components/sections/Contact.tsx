@@ -69,19 +69,19 @@ export function Contact() {
           >
             <div>
               <label htmlFor="name" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-mono)]">Name</label>
-              <input id="name" {...register("name")} className={inputClass} placeholder="Your name" />
+              <input id="name" {...register("name")} className={inputClass} placeholder="Your name" suppressHydrationWarning />
               {errors.name && <p className="text-red-400 text-[13px] mt-1">{errors.name.message}</p>}
             </div>
 
             <div>
               <label htmlFor="email" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-mono)]">Email</label>
-              <input id="email" type="email" {...register("email")} className={inputClass} placeholder="you@email.com" />
+              <input id="email" type="email" {...register("email")} className={inputClass} placeholder="you@email.com" suppressHydrationWarning />
               {errors.email && <p className="text-red-400 text-[13px] mt-1">{errors.email.message}</p>}
             </div>
 
             <div>
               <label htmlFor="subject" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-mono)]">Subject</label>
-              <input id="subject" {...register("subject")} className={inputClass} placeholder="What's this about?" />
+              <input id="subject" {...register("subject")} className={inputClass} placeholder="What's this about?" suppressHydrationWarning />
               {errors.subject && <p className="text-red-400 text-[13px] mt-1">{errors.subject.message}</p>}
             </div>
 
@@ -91,7 +91,7 @@ export function Contact() {
               {errors.message && <p className="text-red-400 text-[13px] mt-1">{errors.message.message}</p>}
             </div>
 
-            <MagneticButton type="submit" variant="filled" disabled={submitting} className="w-full sm:w-auto">
+            <MagneticButton type="submit" variant="filled" disabled={submitting} className="w-full sm:w-auto" suppressHydrationWarning>
               {submitting ? "Sending..." : "Send Message →"}
             </MagneticButton>
 

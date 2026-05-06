@@ -26,7 +26,7 @@ export const HERO_ROLES: HeroRole[] = [
 
 export const ABOUT_STATS: StatItem[] = [
   { value: 9.04, label: "CGPA" },
-  { value: 3, suffix: "+", label: "Projects Built" },
+  { value: 4, suffix: "+", label: "Projects Built" },
   { value: 200, suffix: "+", label: "Event Attendees" },
   { value: 4, label: "Certifications" },
 ];
@@ -109,18 +109,19 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: 2,
-    name: "Pupple",
-    tagline: "Full-Stack Blog Application",
+    name: "AgenticPilot",
+    tagline: "AI-Powered Business Automation",
     description:
-      "Designed and deployed a feature-rich blogging platform with full CRUD, rich text editing via TinyMCE, and global state management using Redux.",
-    tech: ["React.js", "Appwrite", "Redux", "TinyMCE"],
+      "Built an AI-driven SaaS platform that uses intelligent agents to automate business workflows across Gmail, X/Twitter, LinkedIn, and Instagram with a unified operator dashboard.",
+    tech: ["Next.js", "TypeScript", "Supabase", "Gemini API", "Tailwind CSS"],
     highlights: [
-      "Built full CRUD publishing workflows for blog authors.",
-      "Added protected routes and role-aware access control.",
-      "Used Appwrite BaaS and Redux for scalable state handling.",
+      "Designed multi-agent architecture for Gmail, social media, and content automation.",
+      "Built a real-time operator dashboard with live stats and agent monitoring.",
+      "Implemented OAuth-based authentication and Google API integrations.",
     ],
-    sourceUrl: "https://github.com/sujal7122005/React-Mega-Project---BlogAPP",
-    accent: "violet",
+    sourceUrl: "https://github.com/Priyanshu-Debugs/AgenticPilot",
+    liveUrl: "https://www.agenticpilot.app/",
+    accent: "orange",
   },
   {
     id: 3,
@@ -136,6 +137,21 @@ export const PROJECTS: ProjectItem[] = [
     ],
     sourceUrl: "https://github.com/sujal7122005/VideoTube---Backend-Project",
     accent: "green",
+  },
+  {
+    id: 4,
+    name: "Pupple",
+    tagline: "Full-Stack Blog Application",
+    description:
+      "Designed and deployed a feature-rich blogging platform with full CRUD, rich text editing via TinyMCE, and global state management using Redux.",
+    tech: ["React.js", "Appwrite", "Redux", "TinyMCE"],
+    highlights: [
+      "Built full CRUD publishing workflows for blog authors.",
+      "Added protected routes and role-aware access control.",
+      "Used Appwrite BaaS and Redux for scalable state handling.",
+    ],
+    sourceUrl: "https://github.com/sujal7122005/React-Mega-Project---BlogAPP",
+    accent: "violet",
   },
 ];
 

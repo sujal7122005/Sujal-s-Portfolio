@@ -29,7 +29,7 @@ export function Navbar() {
     <>
       <header className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled ? "bg-[var(--bg-primary)]/90 backdrop-blur-md border-b border-[var(--border)]" : "bg-transparent",
+        scrolled ? "bg-[var(--bg-primary)]/90 backdrop-blur-md" : "bg-transparent",
       )}>
         <nav className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5 sm:px-8">
           <a href="#hero" className="text-[15px] font-[700] tracking-tight text-[var(--text-primary)] font-[family-name:var(--font-display)]">
@@ -58,6 +58,15 @@ export function Navbar() {
             </svg>
           </button>
         </nav>
+
+        {/* Professional gradient separator */}
+        <div
+          className="h-px w-full"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent 0%, var(--border) 15%, var(--accent) 50%, var(--border) 85%, transparent 100%)",
+          }}
+        />
       </header>
 
       <AnimatePresence>

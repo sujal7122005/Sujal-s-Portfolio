@@ -77,6 +77,23 @@ export function Navbar() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-40 bg-[var(--bg-primary)] flex flex-col items-center justify-center gap-8 md:hidden"
           >
+            <button
+              type="button"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+              className="absolute right-6 top-6 inline-flex h-10 w-10 items-center justify-center border border-[var(--brand-red)] text-[var(--brand-red)] transition hover:bg-[var(--brand-red)] hover:text-white"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
             {NAV_ITEMS.map((item, i) => (
               <motion.a
                 key={item.href}

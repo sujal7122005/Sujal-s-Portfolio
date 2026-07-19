@@ -20,7 +20,7 @@ export function Experience() {
           viewport={{ once: true, amount: 0.1 }}
         >
           {/* Vertical line — mobile left, desktop center */}
-          <div className="absolute top-0 bottom-0 left-3 md:left-1/2 md:-translate-x-px w-px bg-gradient-to-b from-[var(--accent)]/30 via-[var(--border)] to-transparent" />
+          <div className="absolute top-0 bottom-0 left-3 md:left-1/2 md:-translate-x-px w-px bg-[var(--border)]" />
 
           {TIMELINE_ITEMS.map((item, index) => {
             const isRight = index % 2 === 1;
@@ -35,10 +35,10 @@ export function Experience() {
                 <span className={`absolute top-7 -left-[25px] md:top-7 h-2.5 w-2.5 rounded-full border-2 border-[var(--accent)] bg-[var(--bg-primary)] ${isRight ? "md:-left-[37px]" : "md:-right-[37px] md:left-auto"}`} />
 
                 <GlassCard className="p-5 sm:p-6">
-                  <p className="text-[12px] font-medium text-[var(--accent)] mb-1 font-[family-name:var(--font-mono)]">
+                  <p className="text-[14px] font-[800] uppercase tracking-wide text-[var(--accent)] mb-1 font-[family-name:var(--font-sans)]">
                     {item.period}
                   </p>
-                  <h3 className="text-lg font-[600] text-[var(--text-primary)] font-[family-name:var(--font-display)]">
+                  <h3 className="text-xl font-[800] text-[var(--text-primary)] font-[family-name:var(--font-sans)]">
                     {item.title}
                   </h3>
                   <p className="text-[13px] text-[var(--text-dim)] mt-0.5">

@@ -43,7 +43,7 @@ export function About() {
           {ABOUT_STATS.map((stat) => (
             <motion.div key={stat.label} variants={fadeUp}>
               <GlassCard className="p-6 h-full">
-                <div className="text-4xl sm:text-5xl font-[800] tracking-tight text-[var(--text-primary)] font-[family-name:var(--font-display)]">
+                <div className="text-4xl sm:text-5xl font-[800] tracking-tight text-[var(--text-primary)] font-[family-name:var(--font-sans)]">
                   <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                 </div>
                 <p className="mt-2 text-[13px] text-[var(--text-dim)] font-medium uppercase tracking-wide">

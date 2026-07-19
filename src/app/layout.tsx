@@ -1,26 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, JetBrains_Mono, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import "./globals.css";
-
-const dmSans = DM_Sans({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  weight: ["400", "500"],
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-});
 
 const inter = Inter({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
-  variable: "--font-display",
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -44,16 +30,16 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
-  colorScheme: "dark",
+  themeColor: "#25282b",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${jetBrainsMono.variable} ${inter.variable}`}>
-      <body className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] font-[family-name:var(--font-sans)]">
+    <html lang="en" className={inter.variable}>
+      <body className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] font-[family-name:var(--font-sans)] selection:bg-[var(--accent)] selection:text-white">
         <ScrollProgress />
         {children}
       </body>

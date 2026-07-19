@@ -50,7 +50,7 @@ export function Contact() {
     }
   };
 
-  const inputClass = "w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-4 py-3 text-[var(--text-primary)] text-[15px] outline-none transition-colors focus:border-[var(--accent)]/40 placeholder:text-[var(--text-dim)]";
+  const inputClass = "w-full rounded-sm border border-[var(--border)] bg-[var(--bg-primary)] px-4 py-3 text-[var(--text-primary)] text-[15px] outline-none transition-colors focus:border-[var(--accent)]/40 placeholder:text-[var(--text-dim)]";
 
   return (
     <section id="contact" className="px-5 sm:px-8 py-24 md:py-32 border-t border-[var(--border)]">
@@ -61,32 +61,32 @@ export function Contact() {
           {/* Form */}
           <motion.form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-5 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 sm:p-8"
+            className="space-y-5 rounded-md border border-[var(--border)] bg-[var(--bg-card)] p-6 sm:p-8"
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
             <div>
-              <label htmlFor="name" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-mono)]">Name</label>
+              <label htmlFor="name" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-sans)]">Name</label>
               <input id="name" {...register("name")} className={inputClass} placeholder="Your name" suppressHydrationWarning />
               {errors.name && <p className="text-red-400 text-[13px] mt-1">{errors.name.message}</p>}
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-mono)]">Email</label>
+              <label htmlFor="email" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-sans)]">Email</label>
               <input id="email" type="email" {...register("email")} className={inputClass} placeholder="you@email.com" suppressHydrationWarning />
               {errors.email && <p className="text-red-400 text-[13px] mt-1">{errors.email.message}</p>}
             </div>
 
             <div>
-              <label htmlFor="subject" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-mono)]">Subject</label>
+              <label htmlFor="subject" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-sans)]">Subject</label>
               <input id="subject" {...register("subject")} className={inputClass} placeholder="What's this about?" suppressHydrationWarning />
               {errors.subject && <p className="text-red-400 text-[13px] mt-1">{errors.subject.message}</p>}
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-mono)]">Message</label>
+              <label htmlFor="message" className="block text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-2 font-[family-name:var(--font-sans)]">Message</label>
               <textarea id="message" rows={5} {...register("message")} className={`${inputClass} resize-none`} placeholder="Tell me about your project or opportunity..." />
               {errors.message && <p className="text-red-400 text-[13px] mt-1">{errors.message.message}</p>}
             </div>
@@ -110,8 +110,8 @@ export function Contact() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
-              <h3 className="text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-4 font-[family-name:var(--font-mono)]">Get in touch</h3>
+            <div className="rounded-md border border-[var(--border)] bg-[var(--bg-card)] p-6">
+              <h3 className="text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-4 font-[family-name:var(--font-sans)]">Get in touch</h3>
               <div className="space-y-3 text-[15px]">
                 <a href={`mailto:${CONTACT_DETAILS.email}`} className="block text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
                   {CONTACT_DETAILS.email}
@@ -122,8 +122,8 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
-              <h3 className="text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-4 font-[family-name:var(--font-mono)]">Links</h3>
+            <div className="rounded-md border border-[var(--border)] bg-[var(--bg-card)] p-6">
+              <h3 className="text-[12px] font-medium uppercase tracking-wider text-[var(--text-dim)] mb-4 font-[family-name:var(--font-sans)]">Links</h3>
               <div className="flex flex-wrap gap-2">
                 {SOCIAL_LINKS.map((social) => (
                   <MagneticButton key={social.label} href={social.url} variant="outline" className="text-[12px]">
@@ -133,7 +133,7 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-green-500/15 bg-green-500/[0.04] p-6">
+            <div className="rounded-md border border-green-500/15 bg-green-500/[0.04] p-6">
               <div className="flex items-center gap-3">
                 <span className="h-2.5 w-2.5 rounded-full bg-green-500" />
                 <span className="text-[14px] text-[var(--text-primary)] font-medium">{CONTACT_DETAILS.status}</span>

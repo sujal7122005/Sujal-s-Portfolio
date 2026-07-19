@@ -23,15 +23,15 @@ export function Certifications() {
             <motion.div key={cert.id} variants={fadeUp}>
               <GlassCard className="p-5 sm:p-6 h-full flex flex-col">
                 <div className="flex items-start justify-between gap-4 mb-4">
-                  <span className="text-[var(--accent)] font-[family-name:var(--font-mono)] text-[13px] font-medium">
+                  <span className="text-[var(--accent)] font-[family-name:var(--font-sans)] text-[14px] font-[800] uppercase">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-[12px] text-[var(--text-dim)] font-[family-name:var(--font-mono)]">
+                  <span className="text-[14px] text-[var(--text-dim)] font-[family-name:var(--font-sans)] font-[700] uppercase">
                     {cert.year}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-[600] text-[var(--text-primary)] mb-2 font-[family-name:var(--font-display)]">
+                <h3 className="text-xl font-[800] text-[var(--text-primary)] mb-2 font-[family-name:var(--font-sans)]">
                   {cert.name}
                 </h3>
 

@@ -27,16 +27,16 @@ export function Projects() {
                   <div>
                     {/* Header */}
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="text-[var(--accent)] font-[family-name:var(--font-mono)] text-[13px] font-medium">
+                      <span className="text-[var(--accent)] font-[family-name:var(--font-sans)] font-[700] uppercase text-[12px]">
                         {String(project.id).padStart(2, "0")}
                       </span>
-                      <span className="text-[var(--text-dim)] text-[12px] font-[family-name:var(--font-mono)] uppercase tracking-wider">
+                      <span className="text-[var(--text-dim)] text-[12px] font-[family-name:var(--font-sans)] uppercase tracking-wider font-[700]">
                         {project.tagline}
                       </span>
                     </div>
 
                     {/* Name */}
-                    <h3 className="text-2xl sm:text-3xl font-[700] text-[var(--text-primary)] mb-3 font-[family-name:var(--font-display)]">
+                    <h3 className="text-2xl sm:text-3xl font-[800] text-[var(--text-primary)] mb-3 font-[family-name:var(--font-sans)]">
                       {project.name}
                     </h3>
 
@@ -50,7 +50,7 @@ export function Projects() {
                       {project.tech.map((tech) => (
                         <span
                           key={tech}
-                          className="rounded-md border border-[var(--border)] px-2.5 py-1 text-[11px] text-[var(--text-dim)] font-[family-name:var(--font-mono)]"
+                          className="rounded-full border border-[var(--border)] px-3 py-1 text-[12px] text-[var(--text-dim)] font-[family-name:var(--font-sans)] font-[700]"
                         >
                           {tech}
                         </span>
@@ -82,7 +82,7 @@ export function Projects() {
 
                   {/* Project number watermark — desktop only */}
                   <div className="hidden lg:flex items-start justify-end">
-                    <span className="text-[8rem] font-[900] leading-none text-[var(--bg-secondary)] font-[family-name:var(--font-display)] select-none group-hover:text-[var(--bg-card)] transition-colors duration-500">
+                    <span className="text-[8rem] font-[800] tracking-tighter leading-none text-[var(--bg-secondary)] font-[family-name:var(--font-sans)] select-none group-hover:text-[var(--bg-card)] transition-colors duration-500">
                       {String(project.id).padStart(2, "0")}
                     </span>
                   </div>

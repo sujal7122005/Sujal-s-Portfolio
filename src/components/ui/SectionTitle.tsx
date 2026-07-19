@@ -22,10 +22,10 @@ export function SectionTitle({ label, heading, align = "left" }: SectionTitlePro
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
-      <p className="text-[13px] font-medium tracking-[0.15em] uppercase text-[var(--accent)] mb-4 font-[family-name:var(--font-mono)]">
+      <p className="text-[16px] font-[800] tracking-wide uppercase text-[var(--accent)] mb-3 font-[family-name:var(--font-sans)]">
         {label}
       </p>
-      <h2 className="text-3xl sm:text-4xl lg:text-[3.2rem] font-[800] leading-[1.1] tracking-tight text-[var(--text-primary)] font-[family-name:var(--font-display)]">
+      <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-[300] leading-[1.1] text-[var(--text-primary)] font-[family-name:var(--font-sans)]">
         {heading}
       </h2>
     </motion.div>

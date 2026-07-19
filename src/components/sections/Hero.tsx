@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { HeroTerminal } from "@/components/ui/HeroTerminal";
@@ -10,7 +10,6 @@ import { HERO_ROLES } from "@/lib/constants";
 const heroName = "SUJAL PATEL";
 
 export function Hero() {
-  const letters = useMemo(() => heroName.split(""), []);
   const [roleIndex, setRoleIndex] = useState(0);
   const [typedText, setTypedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -41,7 +40,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[100svh] flex items-center px-5 sm:px-8 pt-24 pb-20 lg:pt-32 lg:pb-28"
+      className="relative min-h-[100svh] flex items-center px-8 pt-24 pb-20 lg:pt-32 lg:pb-28 bg-[var(--bg-deep)] text-[var(--text-on-dark)]"
     >
       <div className="mx-auto w-full max-w-[1200px] grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16 items-center">
         {/* Left: Text content */}
@@ -51,36 +50,32 @@ export function Hero() {
           animate="visible"
           className="space-y-6 text-center lg:text-left"
         >
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--bg-card)] px-4 py-1.5 text-[12px] text-[var(--text-secondary)] font-[family-name:var(--font-mono)] mx-auto lg:mx-0">
-            <span className="h-2 w-2 rounded-full bg-green-500" />
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--bg-card)] px-4 py-1.5 text-[14px] text-[var(--text-primary)] font-[700] mx-auto lg:mx-0 font-[family-name:var(--font-sans)] uppercase">
+            <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
             Open to opportunities
           </motion.div>
 
           <motion.h1
             variants={fadeUp}
-            className="text-[clamp(2.5rem,7vw,5rem)] font-[900] leading-[1.05] tracking-tight font-[family-name:var(--font-display)]"
+            className="text-[clamp(2.5rem,9vw,6.5rem)] font-[800] leading-[0.95] tracking-[-0.04em] uppercase font-[family-name:var(--font-sans)] text-[var(--text-on-dark)] whitespace-nowrap"
           >
-            {letters.map((char, i) => (
-              <span key={i} className={char !== " " ? "inline-block" : ""}>
-                {char === " " ? "\u00A0" : char}
-              </span>
-            ))}
+            {heroName}
           </motion.h1>
 
-          <motion.p variants={fadeUp} className="text-[15px] sm:text-[17px] font-[family-name:var(--font-mono)] text-[var(--text-secondary)] min-h-[1.8em]">
+          <motion.p variants={fadeUp} className="text-[22px] sm:text-[24px] font-[family-name:var(--font-sans)] font-[300] min-h-[1.8em]">
             {typedText}
-            <span className="animate-caret inline-block h-[1.1em] w-[2px] ml-0.5 -mb-0.5 bg-[var(--accent)]" />
+            <span className="animate-caret inline-block h-[1.1em] w-[3px] ml-0.5 -mb-1 bg-[var(--accent)]" />
           </motion.p>
 
-          <motion.p variants={fadeUp} className="text-[var(--text-secondary)] text-base sm:text-lg max-w-lg leading-relaxed mx-auto lg:mx-0">
-            Computer Engineering at VGEC · <span className="text-[var(--text-primary)] font-semibold">9.04 CGPA</span>
+          <motion.p variants={fadeUp} className="text-[var(--text-dim)] text-base sm:text-lg max-w-lg leading-relaxed mx-auto lg:mx-0 font-[300]">
+            Computer Engineering at VGEC · <span className="text-[var(--text-on-dark)] font-[600]">9.04 CGPA</span>
             <br />
             Building full-stack products with clean architecture.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="flex flex-wrap gap-3 justify-center lg:justify-start">
+          <motion.div variants={fadeUp} className="flex flex-wrap gap-4 justify-center lg:justify-start pt-4">
             <MagneticButton href="#projects" variant="filled">
-              View Projects →
+              View Projects
             </MagneticButton>
             <MagneticButton href="/resume" variant="outline">
               Resume

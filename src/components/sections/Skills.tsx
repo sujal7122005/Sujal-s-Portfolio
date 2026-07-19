@@ -22,16 +22,16 @@ export function Skills() {
             <motion.div
               key={category.title}
               variants={fadeUp}
-              className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 hover:border-[var(--border-hover)] transition-colors duration-300"
+              className="rounded-md border border-[var(--border)] bg-[var(--bg-card)] p-6 hover:border-[var(--border-hover)] transition-colors duration-300"
             >
-              <h3 className="text-[13px] font-medium uppercase tracking-[0.12em] text-[var(--accent)] mb-5 font-[family-name:var(--font-mono)]">
+              <h3 className="text-[16px] font-[800] uppercase tracking-wide text-[var(--accent)] mb-5 font-[family-name:var(--font-sans)]">
                 {category.title}
               </h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3">
                 {category.skills.map((skill) => (
                   <span
                     key={skill.label}
-                    className="rounded-md border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-1.5 text-[12px] text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] hover:border-[var(--border-hover)] font-[family-name:var(--font-mono)]"
+                    className="rounded-full bg-[var(--bg-elevated)] px-4 py-1.5 text-[14px] font-[700] text-[var(--text-primary)] transition-colors hover:bg-[var(--border)] font-[family-name:var(--font-sans)] uppercase"
                   >
                     {skill.label}
                   </span>
